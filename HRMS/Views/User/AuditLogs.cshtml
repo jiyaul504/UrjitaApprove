@@ -1,0 +1,30 @@
+﻿@model IEnumerable<HRMS.EntityDto.AuditLogDto>
+
+@{
+    ViewData["Title"] = "Audit Logs";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<h2>Audit Logs</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Action</th>
+            <th>Username</th>
+            <th>Details</th>
+            <th>Timestamp</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var log in Model)
+        {
+            <tr>
+                <td>@log.Action</td>
+                <td>@log.Username</td>
+                <td>@log.Details</td>
+                <td>@log.Timestamp.ToString("yyyy-MM-dd HH:mm:ss")</td>
+            </tr>
+        }
+    </tbody>
+</table>

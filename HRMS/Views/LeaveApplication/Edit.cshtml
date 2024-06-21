@@ -1,0 +1,97 @@
+﻿@model HRMS.EntityDto.LeaveApplicationDto
+
+@{
+    ViewData["Title"] = "Edit Leave Application";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4 style="text-align: center;">Edit Leave Request</h4>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="LeaveApplicationId" />
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="EmployeeId" class="control-label">Employee</label>
+                        <select asp-for="EmployeeId" class="form-control">
+                            <option value="">-- Select Employee --</option>
+                            @foreach (var employee in ViewBag.Employees)
+                            {
+                                var selected = employee.EmployeeId == Model.EmployeeId ? "selected" : "";
+                                <option value="@employee.EmployeeId" selected="@selected">@employee.FirstName @employee.LastName</option>
+                            }
+                        </select>
+                        <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="TypeOfLeave" class="control-label">Type of Leave</label>
+                        <select asp-for="TypeOfLeave" class="form-control">
+                            <option value="Sick Leave" selected="@((Model.TypeOfLeave == "Sick Leave") ? "selected" : "")">Sick Leave</option>
+                            <option value="Casual Leave" selected="@((Model.TypeOfLeave == "Casual Leave") ? "selected" : "")">Casual Leave</option>
+                            <option value="Annual Leave" selected="@((Model.TypeOfLeave == "Annual Leave") ? "selected" : "")">Annual Leave</option>
+                        </select>
+                        <span asp-validation-for="TypeOfLeave" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label">Leave Duration</label>
+                        <div class="form-check">
+                            <input asp-for="HalfDay" class="form-check-input" />
+                            <label class="form-check-label">Half Day</label>
+                        </div>
+                        <div class="form-check">
+                            <input asp-for="FullDay" class="form-check-input" />
+                            <label class="form-check-label">Full Day</label>
+                        </div>
+                        <span asp-validation-for="HalfDay" class="text-danger"></span>
+                        <span asp-validation-for="FullDay" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="StartDate" class="control-label">Start Date</label>
+                        <input asp-for="StartDate" class="form-control" type="date" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="EndDate" class="control-label">End Date</label>
+                        <input asp-for="EndDate" class="form-control" type="date" />
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="Reason" class="control-label">Reason</label>
+                        <input asp-for="Reason" class="form-control" />
+                        <span asp-validation-for="Reason" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="Status" class="control-label">Status</label>
+                        <select asp-for="Status" class="form-control">
+                            <option value="Pending" selected="@((Model.Status == "Pending") ? "selected" : "")">Pending</option>
+                            <option value="Approved" selected="@((Model.Status == "Approved") ? "selected" : "")">Approved</option>
+                            <option value="Rejected" selected="@((Model.Status == "Rejected") ? "selected" : "")">Rejected</option>
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>

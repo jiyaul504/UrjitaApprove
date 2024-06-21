@@ -1,0 +1,54 @@
+﻿@model IEnumerable<HRMS.EntityDto.DepartmentDto>
+@{
+    ViewData["Title"] = "Departments";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add New Department</a>
+</p>
+
+<div class="card">
+    <div class="card-header">
+        <h4 style="text-align: center;">Department List</h4>
+    </div>
+    <div class="card-body">
+        <table id="departmentTable" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.DepartmentId" class="btn btn-primary btn-sm">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.DepartmentId" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            $("#departmentTable").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                // Optionally add other DataTables options here
+            }).buttons().container().appendTo('#departmentTable_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+}

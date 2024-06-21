@@ -1,0 +1,92 @@
+﻿@model IEnumerable<HRMS.EntityDto.LeaveApplicationDto>
+
+@{
+    ViewData["Title"] = "LeaveRequest";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Leave Request</a>
+</p>
+
+<div class="card">
+    <div class="card-header">
+        <h4 style="text-align: center;">Leave List</h4>
+    </div>
+    <div class="card-body">
+        <table id="leaveTable" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Employee Name</th>
+                    <th>Approver Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Half Day</th>
+                    <th>Full Day</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th>Type Of Leave</th>
+                    <th class="no-sort">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.EmployeeName</td>
+                        <td>@(item.Approver != null ? $"{item.Approver.FirstName} {item.Approver.LastName}" : "-")</td>
+                        <td>@item.StartDate.ToString("dd-MM-yyyy")</td>
+                        <td>@item.EndDate.ToString("dd-MM-yyyy")</td>
+                        <td>@item.HalfDay</td>
+                        <td>@item.FullDay</td>
+                        <td>@item.Reason</td>
+                        <td>@item.Status</td>
+                        <td>@item.TypeOfLeave</td>
+                        <td>
+                            @if (item.Status == "Pending")
+                            {
+                                <a asp-action="Approve" asp-route-id="@item.LeaveApplicationId" class="btn btn-primary btn-sm">Approve</a>
+                                <a asp-action="Reject" asp-route-id="@item.LeaveApplicationId" class="btn btn-danger btn-sm">Reject</a>
+                            }
+                            <a asp-action="Edit" asp-route-id="@item.LeaveApplicationId" class="btn btn-primary btn-sm">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.LeaveApplicationId" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#leaveTable").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "order": [],
+                "columnDefs": [
+                    { "targets": 'no-sort', "orderable": false }
+                ],
+                "language": {
+                    "emptyTable": "No data available in table",
+                    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                    "infoEmpty": "Showing 0 to 0 of 0 entries",
+                    "infoFiltered": "(filtered from _MAX_ total entries)",
+                    "lengthMenu": "Show _MENU_ entries",
+                    "loadingRecords": "Loading...",
+                    "processing": "Processing...",
+                    "search": "Search:",
+                    "zeroRecords": "No matching records found",
+                    "paginate": {
+                        "first": "First",
+                        "last": "Last",
+                        "next": "Next",
+                        "previous": "Previous"
+                    }
+                }
+            });
+        });
+    </script>
+}

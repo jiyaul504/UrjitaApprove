@@ -1,0 +1,55 @@
+﻿@model HRMS.EntityDto.LeaveApplicationDto
+
+@{
+    ViewData["Title"] = "Delete Leave Application";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4 style="text-align: center;">Delete Leave Application</h4>
+    </div>
+    <div class="card-body">
+        <h4>Leave Application Details</h4>
+        <dl class="dl-horizontal">
+            <dt>
+                Employee Name
+            </dt>
+            <dd>
+                @Model.EmployeeName
+            </dd>
+            <dt>
+                Start Date
+            </dt>
+            <dd>
+                @Model.StartDate.ToString("d")
+            </dd>
+            <dt>
+                End Date
+            </dt>
+            <dd>
+                @Model.EndDate.ToString("d")
+            </dd>
+            <dt>
+                Reason
+            </dt>
+            <dd>
+                @Model.Reason
+            </dd>
+            <dt>
+                Status
+            </dt>
+            <dd>
+                @Model.Status
+            </dd>
+        </dl>
+        <div class="form-group">
+            <form asp-action="DeleteConfirmed" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="LeaveApplicationId" value="@Model.LeaveApplicationId" />
+                <input type="submit" value="Delete" class="btn btn-danger" /> |
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </form>
+        </div>
+    </div>
+</div>

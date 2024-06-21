@@ -1,0 +1,35 @@
+﻿@model IEnumerable<HRMS.EntityDto.LeaveApplicationDto>
+@{
+    ViewData["Title"] = "Generate Report";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+<h2>Generate Report</h2>
+
+<p>
+    <a asp-action="ExportToExcel" class="btn btn-primary">Export to Excel</a>
+    <a asp-action="ExportToPdf" class="btn btn-secondary">Export to PDF</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Employee Name</th>
+            <th>Approver Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.EmployeeName</td>
+                <td>@(item.Approver != null ? $"{item.Approver.FirstName} {item.Approver.LastName}" : "-")</td>
+                <td>@item.StartDate.ToString("dd-MM-yyyy")</td>
+                <td>@item.EndDate.ToString("dd-MM-yyyy")</td>
+                <td>@item.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>

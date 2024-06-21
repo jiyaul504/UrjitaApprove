@@ -1,0 +1,37 @@
+﻿@model HRMS.EntityDto.EmployeeDto
+
+@{
+    ViewData["Title"] = "Delete Employee";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-header">
+        <h4 style="text-align: center;">Delete Employee</h4>
+    </div>
+    <div class="card-body">
+        <h4>@Model.FirstName @Model.LastName</h4>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DepartmentName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DepartmentName)
+            </dd>
+        </dl>
+        <div class="form-group">
+            <form asp-action="DeleteConfirmed" method="post">
+                <input type="hidden" asp-for="EmployeeId" value="@Model.EmployeeId" />
+                <input type="submit" value="Delete" class="btn btn-danger" /> |
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </form>
+        </div>
+    </div>
+</div>

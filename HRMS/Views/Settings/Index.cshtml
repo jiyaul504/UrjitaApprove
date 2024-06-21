@@ -1,0 +1,29 @@
+﻿@model IEnumerable<HRMS.Models.AppSetting>
+
+@{
+    ViewData["Title"] = "Setting";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+<h1>Settings</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Key</th>
+            <th>Value</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var setting in Model)
+        {
+            <tr>
+                <td>@setting.Key</td>
+                <td>@setting.Value</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@setting.Id" class="btn btn-primary">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<HRMS.EntityDto.UserDto>
+@{
+    ViewData["Title"] = "Users";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New User</a>
+</p>
+
+<div class="card">
+    <div class="card-header">
+        <h4 style="text-align: center;">User List</h4>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.Username</td>
+                        <td>@user.Email</td>
+                        <td>@user.RoleName</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-primary btn-sm">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger btn-sm">Delete</a>
+                            <a asp-action="AssignRole" asp-route-id="@user.Id" class="btn btn-secondary btn-sm">Assign Role</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

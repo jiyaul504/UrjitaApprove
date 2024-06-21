@@ -1,0 +1,156 @@
+﻿@using static HRMS.Helpers.NavigationIndicatorHelper;
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="~/Home" class="brand-link">
+        <img src="~/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+             style="opacity: .8">
+        <span class="brand-text font-weight-light">AdminLTE 3</span>
+    </a>
+    <div class="sidebar">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="~/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                    <a href="#" class="d-block">Hi, @User.Identity.Name </a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="info">
+                    <a href="#" class="d-block">Hi, Visitor</a>
+                </div>
+            </div>
+        }
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item">
+                    <a asp-controller="Dashboard" asp-action="Index" class="nav-link @Url.MakeActiveClass("dashboard","index")">
+                        <i class="nav-icon fas fa-tachometer-alt"></i> <!-- Changed icon class to fa-tachometer-alt -->
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+                </li>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>
+                                Employee
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-controller="Employee" asp-action="Index" class="nav-link @Url.MakeActiveClass("Employee", "Index")">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>Employee List</p>
+                                </a>
+                            </li>
+                            <!-- Add more submenu items here if needed -->
+                        </ul>
+                    </li>
+                    <!-- Department Submenu -->
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-building"></i>
+                            <p>
+                                Department
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-controller="Department" asp-action="Index" class="nav-link @Url.MakeActiveClass("Department", "Index")">
+                                    <i class="nav-icon fas fa-list"></i>
+                                    <p>Department List</p>
+                                </a>
+                            </li>
+                            <!-- Add more submenu items here if needed -->
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-calendar-alt"></i>
+                            <p>
+                                Leave Management
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-controller="LeaveApplication" asp-action="Index" class="nav-link @Url.MakeActiveClass("LeaveApplication", "Index")">
+                                    <i class="nav-icon fas fa-list"></i>
+                                    <p>Leave Application List</p>
+                                </a>
+                            </li>
+                            <!-- Add more submenu items here if needed -->
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-users-cog"></i> <!-- Updated icon for User Management -->
+                            <p>
+                                User Management
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-controller="User" asp-action="Index" class="nav-link @Url.MakeActiveClass("User", "Index")">
+                                    <i class="nav-icon fas fa-user"></i> <!-- Updated icon for User List -->
+                                    <p>User List</p>
+                                </a>
+                            </li>
+                            <!-- Add more submenu items here if needed -->
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-user-shield"></i> <!-- Updated icon for Role Management -->
+                            <p>
+                                Role Management
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-controller="Role" asp-action="Index" class="nav-link @Url.MakeActiveClass("Role", "Index")">
+                                    <i class="nav-icon fas fa-users"></i> <!-- Updated icon for Role List -->
+                                    <p>Role List</p>
+                                </a>
+                            </li>
+                            <!-- Add more submenu items here if needed -->
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index", "AuditLog")" class="nav-link">
+                            <i class="nav-icon fas fa-clipboard-list"></i>
+                            <p>
+                                Audit Logs
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index", "Settings")" class="nav-link">
+                            <i class="nav-icon fas fa-cog"></i> <!-- Changed icon class to fa-cog -->
+                            <p>
+                                Settings
+                            </p>
+                        </a>
+                    </li>
+
+
+
+                }
+            </ul>
+        </nav>
+    </div>
+</aside>
